@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Watson API - Tone Analyzer</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% load staticfiles %}
+	<!-- BootstrapのCSS読み込み-->
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<!-- Common CSS読み込み -->
+	<link href="{% static 'css/common.css' %}" rel="stylesheet">
+</head>
+
+<body>
+	<!-- jQueryの読み込み-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Bootstrapのjs読み込み-->
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<br>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3">
+				<form action="{% url 'watson:tone_analyzer' %}" method="POST">
+					{% csrf_token %}
+					<fieldset>
+						<legend>入力</legend>
+						文章<input type="text" name="input_text" value="{{ input_text }}"><br>
+						<input type="submit" value="実行">
+					</fieldset>
+				</form>
+			</div>
+		</div>
+
+		{% if method_type == "POST" %}
+		<div class="row">
+			<div class="col-md-6">
+				<br>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<fieldset>
+					<legend>結果</legend>
+
+					<h4>感情(emotion_tone)</h4>
+					<table class="table table-condened">
+						<thead>
+							<tr>
+								<th>種類</th>
+								<th>スコア</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for tone_vo in tone_list %}
+							{% if tone_vo.category_id == 'emotion_tone' %}
+							<tr>
+								<td>{{ tone_vo.tone_ja }}({{ tone_vo.tone_name }})</td>
+								<td>{{ tone_vo.score }}</td>
+							</tr>
+							{% endif %}
+						{% endfor %}
+						</tbody>
+					</table>
+
+					<h4>言語(language_tone)</h4>
+					<table class="table table-condened">
+						<thead>
+							<tr>
+								<th>種類</th>
+								<th>スコア</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for tone_vo in tone_list %}
+							{% if tone_vo.category_id == 'language_tone' %}
+							<tr>
+								<td>{{ tone_vo.tone_ja }}({{ tone_vo.tone_name }})</td>
+								<td>{{ tone_vo.score }}</td>
+							</tr>
+							{% endif %}
+						{% endfor %}
+						</tbody>
+					</table>
+
+					<h4>社会(social_tone)</h4>
+					<table class="table table-condened">
+						<thead>
+							<tr>
+								<th>種類</th>
+								<th>スコア</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for tone_vo in tone_list %}
+							{% if tone_vo.category_id == 'social_tone' %}
+							<tr>
+								<td>{{ tone_vo.tone_ja }}({{ tone_vo.tone_name }})</td>
+								<td>{{ tone_vo.score }}</td>
+							</tr>
+							{% endif %}
+						{% endfor %}
+						</tbody>
+					</table>
+
+				</fieldset>
+			</div>
+		</div>
+		{% endif %}
+
+		<div class="row">
+			<div class="col-md-6">
+				<br>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<a href="{% url 'watson:top' %}">戻る</a>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>

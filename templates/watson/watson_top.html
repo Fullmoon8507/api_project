@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Watson API - TOP</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% load staticfiles %}
+	<!-- BootstrapのCSS読み込み-->
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<!-- Common CSS読み込み -->
+	<link href="{% static 'css/common.css' %}" rel="stylesheet">
+</head>
+
+<body>
+	<!-- jQueryの読み込み-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Bootstrapのjs読み込み-->
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<br>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3">
+				<fieldset>
+					<legend>Watson</legend>
+					<ul>
+						<li><a href="{% url 'watson:language_translator' %}">Language Transtalor</a></li>
+						<li><a href="{% url 'watson:tone_analyzer' %}">Tone Analyzer</li>
+					</ul>
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3">
+				<a href="{% url 'accounts:logout' %}">ログアウト</a>
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+body{
+	background-color: black;
+	/*
+	background-image: url("../pic/ingobernableslogo.jpg");
+	*/
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 50%;
+	color: red;
+}
+
+legend{
+	color: red;
+}
